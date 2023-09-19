@@ -1,16 +1,10 @@
-# class FlightSearch:
-#     #This class is responsible for talking to the Flight Search API.
-#     def __init__(self):
-#         self.flights = []
-#
-#     def get_data(self):
 import datetime
-
+import os
 import requests
 from flight_data import FlightData
 
-KIWI_ENDPOINT = "https://api.tequila.kiwi.com/v2/search"
-KIWI_API_KEY = "CbEmcSAliSbv9GmQJpgvLC0lyuiwwXvZ"
+KIWI_ENDPOINT = os.environ.get("KIWI_ENDPOINT")
+KIWI_API_KEY = os.environ.get("KIWI_API_KEY")
 CITY = ["ADD", "PAR", "BER", "TYO"]
 FLY_FROM = "DEN"
 CABIN = "M"
@@ -41,9 +35,7 @@ class FlightSearch:
                 "selected_cabins": CABIN,
                 "adult_hold_bag": HOLD_BAG,
                 "adult_hand_bag": HAND_BAg,
-                "curr": "USD",
-                # "price_to": 1281,
-                # "limit": 20
+                "curr": "USD"
             }
 
             response = requests.get(KIWI_ENDPOINT, params, headers=headers)
@@ -54,9 +46,3 @@ class FlightSearch:
 
             flight_data = FlightData(city=city, iata_code=fly_to, lowest_price=price)
             self.flight_prices.append(flight_data)
-
-            # print(flight_data.city, " ", flight_data.iata_code, " ", flight_data.lowest_price)
-
-# fligh_search = FlightSearch()
-#
-# fligh_search.get_data()

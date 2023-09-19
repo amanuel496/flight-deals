@@ -5,6 +5,7 @@ from flight_data import FlightData
 SHEETY_API_ENDPOINT = os.environ.get("SHEETY_API_ENDPOINT")
 SHEETY_API_AUTH = os.environ.get("SHEETY_API_AUTH")
 
+
 class DataManager:
     # This class is responsible for talking to the Google Sheet.
     def __init__(self):
@@ -26,8 +27,3 @@ class DataManager:
             lowest_price = flight["lowestPrice"]
             flight_data = FlightData(city, iata_code, lowest_price)
             self.all_time_cheapest_flight.append(flight_data)
-
-
-
-
-
